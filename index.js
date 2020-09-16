@@ -38,10 +38,39 @@ Airplane.prototype.land = function () {
     - Give instances of Person a method `.toString()`:
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
-
-function Person() {
+const pantry = ["🍕", "🥚", "🥤", "🥛", "🥗", "🥞", "🥪", "🦪", "🥖", "🥮", "🧈"];
+Person.prototype.eat = function (food) {
+    if (this.stomach.length < 10) {
+        this.stomach.push(food)
+    }
+    else {
+        return `${this.name} is too full...probably time to use the bathroom.`;
+    }
 
 }
+
+Person.prototype.poop = function () {
+    this.stomach = [];
+    return `${this.name} just engaged in the act of defication. It was successful!!!`;
+}
+
+Person.prototype.toString = function () {
+    return `${this.name}, ${this.age}`;
+}
+
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+
+}
+
+const person = new Person("Jimmie Joe", 192);
+for (let i = 0; i <pantry.length; i++) {
+    person.eat(pantry[i]);
+}
+
+
 
 /*
   TASK 2
@@ -56,8 +85,26 @@ function Person() {
     - STRETCH: A car which runs out of `fuel` while driving can't drive any more distance:
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
+Car.prototype.fill = function (gallons) {
+    this.tank += gallons;
+}
 
-function Car() {
+Car.prototype.drive = function (miles) {
+    if (this.tank > 0 && this.tank > this.milesPerGallon / miles) {
+        let gasUsed = this.milesPerGallon / miles;
+        this.odometer += miles;
+        this.tank -= gasUsed;
+    } else {
+        return "Sorry, you don't have enough fuel to drive that far!";
+    }
+}
+function Car(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+
+        
 
 }
 
@@ -68,18 +115,28 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function () {
+    return `Playing with ${this.favoriteToy}`;
+}
+function Baby(name,age,ftoy) {
+    Person.call(this);
+    this.name = name;
+    this.age = age;
+    this.favoriteToy = ftoy;
 
 }
+
+
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. If no objects are defined, than the this keyword in javascript automatically refers to the window object. 
+  2. When defined in an function, the this keyword refers to the object to the left of the dot operator. Must be used inside of an object.
+  3. When the this kw is used inside of a constructor, it refers to the instance of the object that is being created.
+  4. This can be explicitly defined within the call() method.
 */
 
 
