@@ -133,10 +133,10 @@ function Baby(name,age,ftoy) {
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. If no objects are defined, than the this keyword in javascript automatically refers to the window object. 
+  2. When defined in an function, the this keyword refers to the object to the left of the dot operator. Must be used inside of an object.
+  3. When the this kw is used inside of a constructor, it refers to the instance of the object that is being created.
+  4. This can be explicitly defined within the call() method.
 */
 
 
