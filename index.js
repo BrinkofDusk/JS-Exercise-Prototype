@@ -38,10 +38,39 @@ Airplane.prototype.land = function () {
     - Give instances of Person a method `.toString()`:
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
-
-function Person() {
+const pantry = ["🍕", "🥚", "🥤", "🥛", "🥗", "🥞", "🥪", "🦪", "🥖", "🥮", "🧈"];
+Person.prototype.eat = function (food) {
+    if (this.stomach.length < 10) {
+        this.stomach.push(food)
+    }
+    else {
+        return `${this.name} is too full...probably time to use the bathroom.`;
+    }
 
 }
+
+Person.prototype.poop = function () {
+    this.stomach = [];
+    return `${this.name} just engaged in the act of defication. It was successful!!!`;
+}
+
+Person.prototype.toString = function () {
+    return `${this.name}, ${this.age}`;
+}
+
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+
+}
+
+const person = new Person("Jimmie Joe", 192);
+for (let i = 0; i <pantry.length; i++) {
+    person.eat(pantry[i]);
+}
+
+
 
 /*
   TASK 2
