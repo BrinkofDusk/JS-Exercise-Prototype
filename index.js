@@ -85,8 +85,26 @@ for (let i = 0; i <pantry.length; i++) {
     - STRETCH: A car which runs out of `fuel` while driving can't drive any more distance:
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
+Car.prototype.fill = function (gallons) {
+    this.tank += gallons;
+}
 
-function Car() {
+Car.prototype.drive = function (miles) {
+    if (this.tank > 0 && this.tank > this.milesPerGallon / miles) {
+        let gasUsed = this.milesPerGallon / miles;
+        this.odometer += miles;
+        this.tank -= gasUsed;
+    } else {
+        return "Sorry, you don't have enough fuel to drive that far!";
+    }
+}
+function Car(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+
+        
 
 }
 
@@ -97,9 +115,19 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function () {
+    return `Playing with ${this.favoriteToy}`;
+}
+function Baby(name,age,ftoy) {
+    Person.call(this);
+    this.name = name;
+    this.age = age;
+    this.favoriteToy = ftoy;
 
 }
+
+
 
 /* 
   TASK 4
